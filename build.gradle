@@ -1,5 +1,5 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
 }
 
 allprojects {
@@ -16,13 +16,14 @@ allprojects {
     apply plugin: 'java-library'
 
     repositories {
-        jcenter()
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
     }
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE")
-            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.5.RELEASE")
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:Camden.RELEASE")
         }
     }
 }
