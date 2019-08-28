@@ -1,3 +1,19 @@
+!.gitignore
+*.class
+*.war
+bin/
+classes/
+target/
+target/*
+build/*
+build/
+/build
+*.ipr
+*.iml
+*.log
+\*.idea
+\idea
+
 # Compiled class file
 *.class
 
