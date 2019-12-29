@@ -26,4 +26,14 @@ allprojects {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:Camden.RELEASE")
         }
     }
+
+    jar {
+        manifest{
+            attributes ('Main-Class': 'com.discovery.server.DiscoveryServerApplication')
+        }
+
+        from{
+            configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+        }
+    }
 }
