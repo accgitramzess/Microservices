@@ -1,3 +1,5 @@
 rootProject.name = 'microservices'
 
 include 'discovery-server'
+include 'first-microservice'
+

@@ -13,6 +13,12 @@ build/
 *.log
 \*.idea
 \idea
+.gradle
+.idea
+.out
+.build
+\out
+\build
 
 # Compiled class file
 *.class
