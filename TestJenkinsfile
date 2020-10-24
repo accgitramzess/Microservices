@@ -1,0 +1,76 @@
+pipeline {
+
+    agent any
+
+
+    parameters {
+        string(
+        name: 'force_publish_version',
+        defaultValue: '',
+        description: 'Specify a version to force publish docker images to ECR'
+        )
+        choice(name: 'VERSION')
+    }
+
+    environment {
+        NEW_VERSION = '1.3.0'
+        SERVER_CREDENTIALS = credentials('id references of the credentials') /*credentials binding plugin must be installed that it makes possible use credentials defined in jenkins inside Jenkins file*/
+    }
+
+    stages {
+
+        stage("build") {
+            /*
+            Define conditional for each stage, environmental variables that Jenkins provides it
+            when { expression { env.BRANCH_NAME == 'master' || params.force_publish_version != ''} }
+
+                        environment {
+                            AWS_ACCESS_KEY_ID = vault path: 'terraform/aws', key: 'AWS_ACCESS_KEY_ID'
+                            AWS_SECRET_ACCESS_KEY = vault path: 'terraform/aws', key: 'AWS_SECRET_ACCESS_KEY'
+                            STACK_VERSION = VersionNumber versionNumberString: params.force_publish_version != '' ?
+                                    params.force_publish_version :
+                                    '${BUILD_YEAR, XXXX}.' +
+                                            '${BUILD_MONTH, XX}.' +
+                                            '${BUILD_DAY, XX}.' +
+                                            '${BUILDS_TODAY}'
+                        }*/
+            steps {
+                echo 'Building the application...'
+                echo "Building the application ${NEW_VERSION}"
+                sh "${SERVER_CREDENTIALS}"
+            }
+        }
+
+        stage("test") {
+
+            steps {
+                echo 'Testing the application...'
+            }
+        }
+
+        stage("deploy") {
+
+            steps {
+                echo 'Deploying the application...'
+            }
+        }
+    }
+
+    /*post {
+
+        always {
+
+
+        }
+
+        success {
+
+
+        }
+
+        failure {
+
+
+        }
+    }*/
+}

@@ -3,25 +3,31 @@ pipeline {
     agent any
 
     stages {
+        stage('Start') {
+            stages {
+                stage('Init') {
+                    steps {
+                        sh './gradlew clean --no-daemon'
+                    }
+                }
 
-        stage("build") {
+                stage('Compile') {
+                    steps {
+                        sh './gradlew compileJava compileTestJava --no-daemon'
+                    }
+                }
 
-            steps {
-                echo 'Building the application...'
-            }
-        }
+                stage('Check') {
+                    steps {
+                        sh './gradlew check --no-daemon'
+                    }
+                }
 
-        stage("test") {
-
-            steps {
-                echo 'Testing the application...'
-            }
-        }
-
-        stage("deploy") {
-
-            steps {
-                echo 'Deploying the application...'
+                stage('Unit') {
+                    steps {
+                        sh './gradlew unit --no-daemon'
+                    }
+                }
             }
         }
     }
