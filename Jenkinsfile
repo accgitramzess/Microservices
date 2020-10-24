@@ -25,7 +25,7 @@ pipeline {
 
                 stage('Unit') {
                     steps {
-                        sh './gradlew unit --no-daemon'
+                        sh './gradlew test --no-daemon'
                     }
                 }
             }
